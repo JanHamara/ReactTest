@@ -10,8 +10,9 @@
 
 @min: 0%;
 @max: 100%;
-@main-font-color: rgb(38, 40, 97);
 @font: Arial, sans-serif;
+@main-font-color: rgb(38, 40, 97);
+@error-color: rgb(224, 49, 49);
 
 //------------------------------------------------------------------------------
 
@@ -49,9 +50,19 @@
 
 // ------------------------------------------------------------------------------
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@-webkit-keyframes show {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 0.9;
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 0.9;
   }
 }
 
@@ -144,12 +155,14 @@ body,html, ul, li {
     background: whitesmoke;
     border-radius: 2vw;
     box-shadow: 0 0 5px white;
-    transition: box-shadow 1s;
     padding: 3vw;
-
+    opacity: 0;
+    transition: opacity 1s, box-shadow 1s;
+    animation: 1s show 0.5s forwards;
+  
     &:hover {
       box-shadow: 0 0 15px white;
-      transition: box-shadow 1s;
+      transition: opacity 1s, box-shadow 1s;
     }
 
     // Form Container Logo
@@ -170,6 +183,7 @@ body,html, ul, li {
 
       // Input Field Formatting
       .raisely-text-input {
+        .rel;
         width: @max;
         outline: none !important;
         box-shadow: none !important;
@@ -178,10 +192,50 @@ body,html, ul, li {
         margin: 0.5vw 0;
         padding: 0.5vw 1vw;
 
+        // Input Field Label
         .raisely-label {
           font-size: 1vw;
         }
 
+        // Input Invalid Message
+        .raisely-invalid-input {
+          .abs;
+          top: 10px;
+          right: 10px;
+          //
+          font-size: 0.7vw;
+          font-weight: 400;
+          color: @error-color;
+          z-index: 10;
+          //
+          .display(none);
+          opacity: 0;
+          transition: opacity 1s;
+
+          .raisely-invalid-input-text {
+            float: left;
+            line-height: 1.5vw;
+            margin-right: 0.5vw;
+          }
+        
+
+          .raisely-error-icon {
+            .display(inline-block);
+            color: @error-color;
+            font-size: inherit;
+            fill: currentColor;
+            width: 1.3vw;
+            height: 1.3vw;
+          }
+        }
+
+        .raisely-invalid {
+          .display(block);
+          opacity: 1;
+          transition: opacity 1s;
+        }
+
+        // Input Field
         input {
           .nobound;
           width: @max;
@@ -196,7 +250,7 @@ body,html, ul, li {
       }
 
       .active-input {
-        border: 1px rgb(97, 56, 216) solid !important;
+        outline: 1px rgb(97, 56, 216) solid !important;
       }
     }
 
@@ -206,6 +260,7 @@ body,html, ul, li {
       border-radius: 3em;
       box-shadow: none;
       border: none !important;
+      outline: none !important;
       text-decoration: none;
       padding: 1.2vw 0;
       font-weight: 700;
@@ -220,6 +275,16 @@ body,html, ul, li {
         box-shadow: 0 0 15px dimgray;
         transition: background 1s, box-shadow 1s;
         cursor: pointer;
+      }
+
+  
+    }
+
+    .raisely-disabled {
+      opacity: 0.3 !important;
+
+      &:hover {
+        cursor: not-allowed !important;
       }
     }
   }

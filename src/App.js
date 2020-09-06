@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import logo from './logo.png';
 import './App.css';
 import Form from './Form';
-import SubmitButton from "./SubmitButton";
 
 function SignupForm() {
 

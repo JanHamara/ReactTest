@@ -1,9 +1,20 @@
 * {
   box-sizing: border-box;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@-webkit-keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
   }
 }
 .nobound {
@@ -76,12 +87,14 @@ li {
   background: whitesmoke;
   border-radius: 2vw;
   box-shadow: 0 0 5px white;
-  transition: box-shadow 1s;
   padding: 3vw;
+  opacity: 0;
+  transition: opacity 1s, box-shadow 1s;
+  animation: 1s show 0.5s forwards;
 }
 #root #raisely-signup-form:hover {
   box-shadow: 0 0 15px white;
-  transition: box-shadow 1s;
+  transition: opacity 1s, box-shadow 1s;
 }
 #root #raisely-signup-form #raisely-logo {
   width: 40%;
@@ -93,6 +106,7 @@ li {
   padding-bottom: 1vw;
 }
 #root #raisely-signup-form #raisely-form .raisely-text-input {
+  position: relative;
   width: 100%;
   outline: none !important;
   box-shadow: none !important;
@@ -103,6 +117,36 @@ li {
 }
 #root #raisely-signup-form #raisely-form .raisely-text-input .raisely-label {
   font-size: 1vw;
+}
+#root #raisely-signup-form #raisely-form .raisely-text-input .raisely-invalid-input {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.7vw;
+  font-weight: 400;
+  color: #e03131;
+  z-index: 10;
+  display: none;
+  opacity: 0;
+  transition: opacity 1s;
+}
+#root #raisely-signup-form #raisely-form .raisely-text-input .raisely-invalid-input .raisely-invalid-input-text {
+  float: left;
+  line-height: 1.5vw;
+  margin-right: 0.5vw;
+}
+#root #raisely-signup-form #raisely-form .raisely-text-input .raisely-invalid-input .raisely-error-icon {
+  display: inline-block;
+  color: #e03131;
+  font-size: inherit;
+  fill: currentColor;
+  width: 1.3vw;
+  height: 1.3vw;
+}
+#root #raisely-signup-form #raisely-form .raisely-text-input .raisely-invalid {
+  display: block;
+  opacity: 1;
+  transition: opacity 1s;
 }
 #root #raisely-signup-form #raisely-form .raisely-text-input input {
   margin: 0%;
@@ -117,13 +161,14 @@ li {
   margin-top: 0.5vw;
 }
 #root #raisely-signup-form #raisely-form .active-input {
-  border: 1px #6138d8 solid !important;
+  outline: 1px #6138d8 solid !important;
 }
 #root #raisely-signup-form #submit-signup {
   width: 100%;
   border-radius: 3em;
   box-shadow: none;
   border: none !important;
+  outline: none !important;
   text-decoration: none;
   padding: 1.2vw 0;
   font-weight: 700;
@@ -139,4 +184,9 @@ li {
   transition: background 1s, box-shadow 1s;
   cursor: pointer;
 }
-/*# sourceMappingURL=App.css.map */
+#root #raisely-signup-form .raisely-disabled {
+  opacity: 0.3 !important;
+}
+#root #raisely-signup-form .raisely-disabled:hover {
+  cursor: not-allowed !important;
+}

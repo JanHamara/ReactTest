@@ -1,12 +1,15 @@
 import React from "react";
 import './index.css';
 
-function SubmitButton() {
+function SubmitButton({disabled}) {
 
     return (
         <button
+            id="submit-signup"
             type="submit"
-            className="raisely-submit-button"
+            className={
+                disabled === "true" ? "raisely-disabled" : ""
+            }
         >
             Sign Up
         </button>
