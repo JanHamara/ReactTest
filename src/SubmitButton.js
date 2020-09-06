@@ -1,13 +1,12 @@
 import React from "react";
 import './index.css';
 
-function SubmitButton({buttonId}) {
+function SubmitButton() {
+
     return (
         <button
             type="submit"
             className="raisely-submit-button"
-            id={buttonId}
-            onClick="submitForm()"
         >
             Sign Up
         </button>

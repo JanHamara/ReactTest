@@ -16,7 +16,6 @@ function SignupForm() {
 
             <Form formId="raisely-form" />
 
-            <SubmitButton buttonId="submit-signup" />
         </div>
     );
 }

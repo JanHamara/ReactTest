@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import './index.css';
 
-function Input({type, name, label}) {
+function Input({type, name, label, value, onChange}) {
     const [inputStatus, setInputStatus] = useState("inactive");
 
     return (
@@ -18,11 +18,10 @@ function Input({type, name, label}) {
                 label={name}
                 name={name}
                 id={name}
+                value={value}
+                onChange={e => onChange(e.target.value)}
                 onFocus={() => setInputStatus("active")}
                 onBlur={() => setInputStatus("inactive")}
-                autocomplete={
-                    {name} === "password" ? "new-password" : "false"
-                }
             />
         </div>
     )
