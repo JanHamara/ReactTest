@@ -26,7 +26,9 @@ export const validateMail = async (email) => {
 
 // Form Validation - validateForm()
 export const validateForm = (firstName, lastName, email, password) => {
+    // Validate that no input field is empty
     if (firstName !== "" && lastName !== "" && email !== "" && password !== "") {
+        // Validate email format
         return validateMailFormat(email);
     } else {
         return false;
@@ -35,7 +37,8 @@ export const validateForm = (firstName, lastName, email, password) => {
 
 // Mail Format Validation - validateMailFormat()
 export const validateMailFormat = (email) => {
-    const mailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // RegEx for validating correct formatting of email address
+    const mailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return (mailRegEx.test(email))
 }
 
@@ -63,6 +66,8 @@ export const submitForm = async (firstName, lastName, email, password) => {
 
     // Parse the response body text as JSON
     const formResponseBody = await formResponse.json();
+
+    console.log(formResponseBody.message); // thank you for joining
 
     // Return the response body
     return formResponseBody

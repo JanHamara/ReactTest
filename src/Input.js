@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import './index.css';
 import { validateMailFormat } from './api.js'
 
@@ -21,7 +21,6 @@ function Input({type, name, label, value, onChange}) {
         // If input field is of type "email" -> run validateMailFormat()
         setMailFormatValidated("false");
         type === "email" ? (validateMailFormat(value) ? setMailFormatValidated("true") : setMailFormatValidated("false")) : console.log("");
-        console.log(mailFormatValidated);
     }
 
     return (

@@ -12,6 +12,7 @@
   @max: 100%;
   @font: Arial, sans-serif;
   @main-font-color: rgb(38, 40, 97);
+  @main-font-color-2: rgb(95, 64, 210);
   @error-color: rgb(224, 49, 49);
   
   //------------------------------------------------------------------------------
@@ -63,6 +64,26 @@
       opacity: 0;
     } to {
       opacity: 0.9;
+    }
+  }
+
+  @-webkit-keyframes hide-alert {
+    from {
+      transform: translate(0,0);
+      opacity: 1;
+    } to {
+      transform: translate(0, 5vw);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes hide-alert {
+    from {
+      transform: translate(0,0);
+      opacity: 1;
+    } to {
+      transform: translate(0, 5vw);
+      opacity: 0;
     }
   }
   
@@ -144,12 +165,14 @@
   #root {
     .fs;
     .nobound;
+    .rel;
     background-image: url("./assets/bg.jpg");
     .bg-setup;
   
     // Form Container
     #raisely-signup-form {
       .p-center;
+      .rel;
       width: 30vw;
       height: auto;
       //
@@ -255,7 +278,7 @@
         }
       }
   
-      // Button Component
+      // Submit Button Component
       #raisely-form-submit {
         width: 100%;
         border-radius: 3em;
@@ -266,7 +289,7 @@
         padding: 1.2vw 0;
         font-weight: 700;
         color: white;
-        background: rgb(97, 56, 216);
+        background: @main-font-color-2;
         box-shadow: 0 0 15px darkgray;
         transition: background 1s, box-shadow 1s;
         margin-top: 2vw;
@@ -287,6 +310,37 @@
         &:hover {
           cursor: not-allowed !important;
         }
+      }
+
+      // Mail Alert
+      #raisely-mail-alert {
+        .abs;
+        width: 100%;
+        margin: auto;
+        height: auto;
+        left: 0%;
+        bottom: 0%;
+        //
+        background: whitesmoke;
+        border-radius: 2vw;
+        box-shadow: 0 0 5px @main-font-color;
+        font-weight: 600;
+        font-size: 0.8vw;
+        padding: 2vw;
+        //
+        transform: translate(0, 5vw);
+        opacity: 0;
+        transition: opacity 1s, transform 1s;
+
+        span {
+          color: @main-font-color-2;
+        }
+      }
+
+      .mail-alert-enabled {
+        transform: translate(0, 0) !important;
+        opacity: 1 !important;
+        transition: opacity 1s, transform 1s !important;
       }
     }
   }
