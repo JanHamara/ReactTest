@@ -1,0 +1,292 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  //------------------------------------------------------------------------------
+  
+  // Variables
+  
+  // ------------------------------------------------------------------------------
+  
+  @min: 0%;
+  @max: 100%;
+  @font: Arial, sans-serif;
+  @main-font-color: rgb(38, 40, 97);
+  @error-color: rgb(224, 49, 49);
+  
+  //------------------------------------------------------------------------------
+  
+  // Media Queries
+  
+  // ------------------------------------------------------------------------------
+  
+  
+  // Smartphone General
+  @smartphone-all: ~"only screen and (max-width: 479px) and (orientation: portrait)";
+  @smartphone-all-landscape: ~"only screen and (max-width: 824px) and (orientation: landscape)";
+  
+  // Smartphone [Sizes]
+  @smartphone-small: ~"only screen and (max-width: 330px) and (orientation: portrait)";
+  @smartphone: ~"only screen and (min-width: 330px) and (max-width: 400px) and (orientation: portrait)";
+  @smartphone-medium: ~"only screen and (min-width: 400px) and (max-width: 410px) and (orientation: portrait)";
+  @smartphone-big: ~"only screen and (min-width: 410px) and (max-width: 479px) and (orientation: portrait)";
+  
+  // Tablets
+  @tablet-small: ~"only screen and (min-width: 760px) and (max-width: 1024px) and (orientation: portrait)";
+  @tablet-big: ~"only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait)";
+  @tablet-landscape: ~"only screen and (width: 1024px) and (height: 768px) and (orientation: landscape)";
+  @iPad-Pro-landscape: ~"only screen and (width: 1366px) and (height: 1024px) and (orientation: landscape)";
+  
+  // Big Screens [ 16:9 aspect ratio ]
+  @HD-screen: ~"only screen and (min-width: 1280px)"; // 1366 x 768 - common large display [W3C]
+  @FullHD-screen: ~"only screen and (min-width: 1920px)"; // 1920 x 1080 - larger display [W3C]
+  @QHD-screen: ~"only screen and (min-width: 2560px)"; // 2560 x 1440 - high-definition desktop display - 27” monitors and bigger
+  @4K-screen: ~"only screen and (min-width: 3840px)"; // 3840 x 2160 - 4K screens
+  @8K-screen: ~"only screen and (min-width: 7680px)"; // 7680 x 4800 - 8K screens
+  
+  //------------------------------------------------------------------------------
+  
+  // Animations
+  
+  // ------------------------------------------------------------------------------
+  
+  @-webkit-keyframes show {
+    from {
+      opacity: 0;
+    } to {
+      opacity: 0.9;
+    }
+  }
+  
+  @keyframes show {
+    from {
+      opacity: 0;
+    } to {
+      opacity: 0.9;
+    }
+  }
+  
+  //------------------------------------------------------------------------------
+  
+  // Classes
+  
+  // ------------------------------------------------------------------------------
+  
+  .nobound {
+    margin: @min;
+    padding: @min;
+  }
+  
+  .fs {
+    width: @max;
+    height: @max;
+  }
+  
+  .display (@value: block) {
+    display: @value;
+  }
+  
+  .position (@pos: absolute) {
+    position: @pos;
+  }
+  
+  .aligntext (@align: center) {
+    text-align: @align;
+  }
+  
+  /*    Mixin for perfect absolute positioning - centering    */
+  .p-center {
+    .position;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .rel {
+    .position(relative);
+  }
+  
+  .abs {
+    .position;
+  }
+  
+  .bg-setup {
+    background-position:  center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    -ms-content-zooming: none;
+  }
+  
+  //-------------------------------------------------------------
+  
+  body,html, ul, li {
+    .fs;
+    .nobound;
+    color: @main-font-color !important;
+    font-family: @font !important;
+    font-size: @max; // font-size: 100% // Needs to be defined for correct responsive resizing of text
+    font-weight: 700 !important;
+    font-style: normal !important;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+  
+  //-------------------------------------------------------------
+  
+  //                        Main CSS
+  
+  //-------------------------------------------------------------
+  
+  #root {
+    .fs;
+    .nobound;
+    background-image: url("./assets/bg.jpg");
+    .bg-setup;
+  
+    // Form Container
+    #raisely-signup-form {
+      .p-center;
+      width: 30vw;
+      height: auto;
+      //
+      background: whitesmoke;
+      border-radius: 2vw;
+      box-shadow: 0 0 5px white;
+      padding: 3vw;
+      opacity: 0;
+      transition: opacity 1s, box-shadow 1s;
+      animation: 1s show 0.5s forwards;
+    
+      &:hover {
+        box-shadow: 0 0 15px white;
+        transition: opacity 1s, box-shadow 1s;
+      }
+  
+      // Form Container Logo
+      #raisely-form-logo {
+        width: 40%;
+        margin: auto;
+        padding-bottom: 2vw;
+      }
+  
+      // Form Container Heading
+      .raisely-form-heading {
+        font-size: 1.5vw;
+        padding-bottom: 1vw;
+      }
+  
+      // Form Component
+      #raisely-form {
+  
+        // Input Field Formatting
+        .raisely-text-input {
+          .rel;
+          width: @max;
+          outline: none !important;
+          box-shadow: none !important;
+          border: none !important;
+          background: rgb(241, 241, 247);
+          margin: 0.5vw 0;
+          padding: 0.5vw 1vw;
+  
+          // Input Field Label
+          .raisely-label {
+            font-size: 1vw;
+          }
+  
+          // Input Invalid Message
+          .raisely-invalid-input {
+            .abs;
+            top: 10px;
+            right: 10px;
+            //
+            font-size: 0.7vw;
+            font-weight: 400;
+            color: @error-color;
+            z-index: 10;
+            //
+            .display(none);
+            opacity: 0;
+            transition: opacity 1s;
+  
+            .raisely-invalid-input-text {
+              float: left;
+              line-height: 1.5vw;
+              margin-right: 0.5vw;
+            }
+          
+  
+            .raisely-error-icon {
+              .display(inline-block);
+              color: @error-color;
+              font-size: inherit;
+              fill: currentColor;
+              width: 1.3vw;
+              height: 1.3vw;
+            }
+          }
+  
+          .raisely-invalid {
+            .display(block);
+            opacity: 1;
+            transition: opacity 1s;
+          }
+  
+          // Input Field
+          input {
+            .nobound;
+            width: @max;
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            background: rgb(241, 241, 247);
+            color: rgba(0, 0, 0, 0.7);
+            font-size: 1vw;
+            margin-top: 0.5vw;
+          }
+        }
+  
+        .active-input {
+          outline: 1px rgb(97, 56, 216) solid !important;
+        }
+      }
+  
+      // Button Component
+      #raisely-form-submit {
+        width: 100%;
+        border-radius: 3em;
+        box-shadow: none;
+        border: none !important;
+        outline: none !important;
+        text-decoration: none;
+        padding: 1.2vw 0;
+        font-weight: 700;
+        color: white;
+        background: rgb(97, 56, 216);
+        box-shadow: 0 0 15px darkgray;
+        transition: background 1s, box-shadow 1s;
+        margin-top: 2vw;
+  
+        &:hover {
+          background: rgb(145, 69, 214);
+          box-shadow: 0 0 15px dimgray;
+          transition: background 1s, box-shadow 1s;
+          cursor: pointer;
+        }
+  
+    
+      }
+  
+      .raisely-disabled {
+        opacity: 0.3 !important;
+  
+        &:hover {
+          cursor: not-allowed !important;
+        }
+      }
+    }
+  }

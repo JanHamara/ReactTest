@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './index.css';
 import Input from "./Input";
 import SubmitButton from "./SubmitButton";
-import { validateMail, submitForm } from './api.js'
+import { validateMail, validateForm, submitForm } from './api.js'
 
 function Form({ formId }) {
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [submitDisabled, setSubmitDisabled] = useState("false");
+    // Without initiating states for input values with empty string "", inital value would be 'undefined'
+    // and that would cause enableSubmit() function to not work properly
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    //
+    const [submitDisabled, setSubmitDisabled] = useState("true");
 
     const submitData = async (e) => {
         e.preventDefault();
@@ -25,6 +28,15 @@ function Form({ formId }) {
         }
     }
 
+    useEffect(() => {
+        // Update the button availability based on input values in form
+        //
+        // Conditions for enabling Submit button
+        // - No input field can be empty
+        // - Mail address format must be correct
+        validateForm(firstName, lastName, email, password) ? setSubmitDisabled("false") : setSubmitDisabled("true")
+      });
+
     return (
         <form id={ formId } onSubmit={submitData}>
             <Input type="text" name="firstName" label="First Name" value={firstName} onChange={setFirstName}/>
@@ -32,7 +44,7 @@ function Form({ formId }) {
             <Input type="email" name="email" label="Email" value={email} onChange={setEmail}/>
             <Input type="password" name="password" label="Password" value={password} onChange={setPassword}/>
 
-            <SubmitButton disabled={submitDisabled} />
+            <SubmitButton id="raisely-form-submit" disabled={submitDisabled} />
         </form>
     )
 }

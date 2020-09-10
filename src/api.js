@@ -1,4 +1,6 @@
+// Mail Validation - validateMail()
 export const validateMail = async (email) => {
+    // Request Post Body
     const emailData = {
         "campaignUuid": "46aa3270-d2ee-11ea-a9f0-e9a68ccff42a",
         "data": {
@@ -6,6 +8,7 @@ export const validateMail = async (email) => {
         }
     }
 
+    // Make the POST request to the Raisely API (asynchronous)
     const mailResponse = await fetch("https://api.raisely.com/v3/check-user", {
         method: 'post',
         headers: {
@@ -14,13 +17,31 @@ export const validateMail = async (email) => {
         body: JSON.stringify(emailData)
     })
 
+    // Parse the response body text as JSON
     const mailResponseBody = await mailResponse.json();
 
+    // Return true/false based on status value
     return mailResponseBody.data.status === 'OK'
 }
 
-// export const submitForm
+// Form Validation - validateForm()
+export const validateForm = (firstName, lastName, email, password) => {
+    if (firstName !== "" && lastName !== "" && email !== "" && password !== "") {
+        return validateMailFormat(email);
+    } else {
+        return false;
+    }
+}
+
+// Mail Format Validation - validateMailFormat()
+export const validateMailFormat = (email) => {
+    const mailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return (mailRegEx.test(email))
+}
+
+// Form Submit - submitForm()
 export const submitForm = async (firstName, lastName, email, password) => {
+    // Request Post Body
     const formData = {
         "campaignUuid": "46aa3270-d2ee-11ea-a9f0-e9a68ccff42a",
         "data": {
@@ -31,6 +52,7 @@ export const submitForm = async (firstName, lastName, email, password) => {
         } 
     }
 
+    // Make the POST request to the Raisely API (asynchronous)
     const formResponse = await fetch("https://api.raisely.com/v3/signup", {
         method: 'post',
         headers: {
@@ -39,7 +61,9 @@ export const submitForm = async (firstName, lastName, email, password) => {
         body: JSON.stringify(formData)
     })
 
+    // Parse the response body text as JSON
     const formResponseBody = await formResponse.json();
 
+    // Return the response body
     return formResponseBody
 }
