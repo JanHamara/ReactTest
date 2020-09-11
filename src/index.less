@@ -14,6 +14,8 @@
   @main-font-color: rgb(38, 40, 97);
   @main-font-color-2: rgb(95, 64, 210);
   @error-color: rgb(224, 49, 49);
+  //
+  @raisely-outline: 1px rgb(97, 56, 216) solid !important;
   
   //------------------------------------------------------------------------------
   
@@ -67,22 +69,42 @@
     }
   }
 
-  @-webkit-keyframes hide-alert {
+  @-webkit-keyframes slow-display {
     from {
-      transform: translate(0,0);
+      display: none;
+      opacity: 0;
+    } to {
+      display: block !important;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slow-display {
+    from {
+      display: none;
+      opacity: 0;
+    } to {
+      display: block !important;
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes slow-hide {
+    from {
+      display: block;
       opacity: 1;
     } to {
-      transform: translate(0, 5vw);
+      display: none !important;
       opacity: 0;
     }
   }
   
-  @keyframes hide-alert {
+  @keyframes slow-hide {
     from {
-      transform: translate(0,0);
+      display: block;
       opacity: 1;
     } to {
-      transform: translate(0, 5vw);
+      display: none !important;
       opacity: 0;
     }
   }
@@ -162,6 +184,8 @@
   
   //-------------------------------------------------------------
   
+  // rootElement
+
   #root {
     .fs;
     .nobound;
@@ -169,7 +193,10 @@
     background-image: url("./assets/bg.jpg");
     .bg-setup;
   
+    //------------------------------
+
     // Form Container
+
     #raisely-signup-form {
       .p-center;
       .rel;
@@ -189,158 +216,247 @@
         transition: opacity 1s, box-shadow 1s;
       }
   
-      // Form Container Logo
+      //------------------------------
+
+      // Form Logo
+
       #raisely-form-logo {
         width: 40%;
         margin: auto;
         padding-bottom: 2vw;
       }
   
-      // Form Container Heading
-      .raisely-form-heading {
-        font-size: 1.5vw;
-        padding-bottom: 1vw;
-      }
-  
-      // Form Component
-      #raisely-form {
-  
-        // Input Field Formatting
-        .raisely-text-input {
-          .rel;
-          width: @max;
-          outline: none !important;
-          box-shadow: none !important;
-          border: none !important;
-          background: rgb(241, 241, 247);
-          margin: 0.5vw 0;
-          padding: 0.5vw 1vw;
-  
-          // Input Field Label
-          .raisely-label {
-            font-size: 1vw;
+      //------------------------------
+
+      // Raisely Container
+
+      .raisely-container {
+        
+        //------------------------------
+
+        // [ Form ]
+
+        #raisely-form {
+          opacity: 1;
+          transition: opacity 1s;
+
+          //------------------------------
+
+          // Form Heading
+
+          .raisely-form-heading {
+            font-size: 1.5vw;
+            padding-bottom: 1.5vw;
           }
-  
-          // Input Invalid Message
-          .raisely-invalid-input {
-            .abs;
-            top: 10px;
-            right: 10px;
-            //
-            font-size: 0.7vw;
-            font-weight: 400;
-            color: @error-color;
-            z-index: 10;
-            //
-            .display(none);
-            opacity: 0;
-            transition: opacity 1s;
-  
-            .raisely-invalid-input-text {
-              float: left;
-              line-height: 1.5vw;
-              margin-right: 0.5vw;
-            }
-          
-  
-            .raisely-error-icon {
-              .display(inline-block);
-              color: @error-color;
-              font-size: inherit;
-              fill: currentColor;
-              width: 1.3vw;
-              height: 1.3vw;
-            }
-          }
-  
-          .raisely-invalid {
-            .display(block);
-            opacity: 1;
-            transition: opacity 1s;
-          }
-  
-          // Input Field
-          input {
-            .nobound;
+    
+          //------------------------------
+
+          // Input Fields
+
+          .raisely-text-input {
+            .rel;
             width: @max;
             outline: none !important;
             box-shadow: none !important;
             border: none !important;
             background: rgb(241, 241, 247);
-            color: rgba(0, 0, 0, 0.7);
-            font-size: 1vw;
-            margin-top: 0.5vw;
+            margin: 0.7vw 0;
+            padding: 0.5vw 1vw;
+    
+            // Input Field Label
+            .raisely-label {
+              font-size: 1vw;
+            }
+    
+            // Input Invalid Message
+            .raisely-invalid-input {
+              .abs;
+              top: 10px;
+              right: 10px;
+              //
+              font-size: 0.7vw;
+              font-weight: 400;
+              color: @error-color;
+              z-index: 10;
+              //
+              .display(none);
+              opacity: 0;
+              transition: opacity 1s;
+    
+              .raisely-invalid-input-text {
+                float: left;
+                line-height: 1.5vw;
+                margin-right: 0.5vw;
+              }
+            
+    
+              .raisely-error-icon {
+                .display(inline-block);
+                color: @error-color;
+                font-size: inherit;
+                fill: currentColor;
+                width: 1.3vw;
+                height: 1.3vw;
+              }
+            }
+    
+            .raisely-invalid {
+              .display(block);
+              opacity: 1;
+              transition: opacity 1s;
+            }
+    
+            // Input Field
+            input {
+              .nobound;
+              width: @max;
+              outline: none !important;
+              box-shadow: none !important;
+              border: none !important;
+              background: rgb(241, 241, 247);
+              color: rgba(0, 0, 0, 0.7);
+              font-size: 1vw;
+              margin-top: 0.5vw;
+            }
+          }
+    
+          // Input Fields - Active
+          .active-input {
+            outline: @raisely-outline;
+          }
+
+          //------------------------------
+
+          // Submit Button
+
+          #raisely-form-submit {
+            width: 100%;
+            border-radius: 3em;
+            box-shadow: none;
+            border: none !important;
+            outline: none !important;
+            text-decoration: none;
+            padding: 1.2vw 0;
+            font-weight: 700;
+            color: white;
+            background: @main-font-color-2;
+            box-shadow: 0 0 15px darkgray;
+            transition: background 1s, box-shadow 1s;
+            margin-top: 2vw;
+      
+            &:hover {
+              background: rgb(145, 69, 214);
+              box-shadow: 0 0 15px dimgray;
+              transition: background 1s, box-shadow 1s;
+              cursor: pointer;
+            }
+          }
+      
+          // Submit Button - Disabled
+          .raisely-button-disabled {
+            opacity: 0.3 !important;
+      
+            &:hover {
+              cursor: not-allowed !important;
+            }
           }
         }
-  
-        .active-input {
-          outline: 1px rgb(97, 56, 216) solid !important;
+
+        //------------------------------
+
+        // [ Form ] - Disabled
+
+        .raisely-form-disabled {
+          transition: opacity 1s;
+          animation: 1s slow-hide 1s forwards;
         }
-      }
-  
-      // Submit Button Component
-      #raisely-form-submit {
-        width: 100%;
-        border-radius: 3em;
-        box-shadow: none;
-        border: none !important;
-        outline: none !important;
-        text-decoration: none;
-        padding: 1.2vw 0;
-        font-weight: 700;
-        color: white;
-        background: @main-font-color-2;
-        box-shadow: 0 0 15px darkgray;
-        transition: background 1s, box-shadow 1s;
-        margin-top: 2vw;
-  
-        &:hover {
-          background: rgb(145, 69, 214);
-          box-shadow: 0 0 15px dimgray;
-          transition: background 1s, box-shadow 1s;
-          cursor: pointer;
+
+        //------------------------------
+
+        // Mail Alert
+
+        #raisely-mail-alert {
+          .p-center;
+          .aligntext(center);
+          .display(none);
+          top: 57%;
+          width: 80%;
+          height: auto;
+          background: whitesmoke;
+          //
+          font-weight: 600;
+          font-size: 0.8vw;
+          //
+          z-index: 9999 !important;
+          opacity: 0;
+          transition: opacity 1s;
+
+          .alert-icon {
+            .aligntext(center);
+            margin: 0vw auto 3vw;
+
+            div {
+              width: 8vw !important;
+              height: 8vw !important;
+              margin: auto;
+
+              svg {
+                fill: @error-color !important;
+              }
+            }
+          }
+        
+          .alert-text-header {
+            font-size: 2vw;
+            margin-bottom: 2vw;
+          }
+
+          .alert-text {
+            font-size: 1vw;
+            font-weight: 300;
+            line-height: 200%;
+          }
+
+          .alert-mail {
+            .display(inline-block);
+            width: auto;
+            font-weight: 600;
+            font-size: 1vw;
+            //
+            color: @main-font-color-2;
+            background: rgb(241, 241, 247);
+            outline: @raisely-outline;
+            padding: 0.5vw 1vw;
+            margin: 1vw 0 4vw;
+          }
+
+          .alert-button {
+            font-size: 0.8vw;
+            font-weight: 700;
+            margin-bottom: 2vw;
+            z-index: 9999 !important;
+
+            &:hover {
+              color: @main-font-color-2;
+              cursor: pointer;
+            }
+          }
         }
-  
-    
-      }
-  
-      .raisely-disabled {
-        opacity: 0.3 !important;
-  
-        &:hover {
-          cursor: not-allowed !important;
+        
+        // Mail Alert - Enabled
+        .mail-alert-enabled {
+          .display(block) !important;
+          transition: opacity 1s;
+          animation: 1s slow-display 1s forwards;
         }
+
+      //------------------------------
+      // end of - Raisely Container
       }
 
-      // Mail Alert
-      #raisely-mail-alert {
-        .abs;
-        width: 100%;
-        margin: auto;
-        height: auto;
-        left: 0%;
-        bottom: 0%;
-        //
-        background: whitesmoke;
-        border-radius: 2vw;
-        box-shadow: 0 0 5px @main-font-color;
-        font-weight: 600;
-        font-size: 0.8vw;
-        padding: 2vw;
-        //
-        transform: translate(0, 5vw);
-        opacity: 0;
-        transition: opacity 1s, transform 1s;
-
-        span {
-          color: @main-font-color-2;
-        }
-      }
-
-      .mail-alert-enabled {
-        transform: translate(0, 0) !important;
-        opacity: 1 !important;
-        transition: opacity 1s, transform 1s !important;
-      }
+    //------------------------------
+    // end of - Form Container
     }
+  //------------------------------
+  // end of - rootElement
   }

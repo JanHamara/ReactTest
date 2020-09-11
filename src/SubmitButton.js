@@ -8,7 +8,7 @@ function SubmitButton({id, disabled}) {
             id={id}
             type="submit"
             className={
-                disabled === "true" ? "raisely-disabled" : ""
+                disabled === "true" ? "raisely-button-disabled" : ""
             }
         >
             Sign Up

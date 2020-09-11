@@ -17,23 +17,43 @@
     opacity: 0.9;
   }
 }
-@-webkit-keyframes hide-alert {
+@-webkit-keyframes slow-display {
   from {
-    transform: translate(0, 0);
+    display: none;
+    opacity: 0;
+  }
+  to {
+    display: block !important;
+    opacity: 1;
+  }
+}
+@keyframes slow-display {
+  from {
+    display: none;
+    opacity: 0;
+  }
+  to {
+    display: block !important;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slow-hide {
+  from {
+    display: block;
     opacity: 1;
   }
   to {
-    transform: translate(0, 5vw);
+    display: none !important;
     opacity: 0;
   }
 }
-@keyframes hide-alert {
+@keyframes slow-hide {
   from {
-    transform: translate(0, 0);
+    display: block;
     opacity: 1;
   }
   to {
-    transform: translate(0, 5vw);
+    display: none !important;
     opacity: 0;
   }
 }
@@ -125,24 +145,28 @@ li {
   margin: auto;
   padding-bottom: 2vw;
 }
-#root #raisely-signup-form .raisely-form-heading {
-  font-size: 1.5vw;
-  padding-bottom: 1vw;
+#root #raisely-signup-form .raisely-container #raisely-form {
+  opacity: 1;
+  transition: opacity 1s;
 }
-#root #raisely-signup-form #raisely-form .raisely-text-input {
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-form-heading {
+  font-size: 1.5vw;
+  padding-bottom: 1.5vw;
+}
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-text-input {
   position: relative;
   width: 100%;
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
   background: #f1f1f7;
-  margin: 0.5vw 0;
+  margin: 0.7vw 0;
   padding: 0.5vw 1vw;
 }
-#root #raisely-signup-form #raisely-form .raisely-text-input .raisely-label {
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-text-input .raisely-label {
   font-size: 1vw;
 }
-#root #raisely-signup-form #raisely-form .raisely-text-input .raisely-invalid-input {
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-text-input .raisely-invalid-input {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -154,12 +178,12 @@ li {
   opacity: 0;
   transition: opacity 1s;
 }
-#root #raisely-signup-form #raisely-form .raisely-text-input .raisely-invalid-input .raisely-invalid-input-text {
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-text-input .raisely-invalid-input .raisely-invalid-input-text {
   float: left;
   line-height: 1.5vw;
   margin-right: 0.5vw;
 }
-#root #raisely-signup-form #raisely-form .raisely-text-input .raisely-invalid-input .raisely-error-icon {
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-text-input .raisely-invalid-input .raisely-error-icon {
   display: inline-block;
   color: #e03131;
   font-size: inherit;
@@ -167,12 +191,12 @@ li {
   width: 1.3vw;
   height: 1.3vw;
 }
-#root #raisely-signup-form #raisely-form .raisely-text-input .raisely-invalid {
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-text-input .raisely-invalid {
   display: block;
   opacity: 1;
   transition: opacity 1s;
 }
-#root #raisely-signup-form #raisely-form .raisely-text-input input {
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-text-input input {
   margin: 0%;
   padding: 0%;
   width: 100%;
@@ -184,10 +208,10 @@ li {
   font-size: 1vw;
   margin-top: 0.5vw;
 }
-#root #raisely-signup-form #raisely-form .active-input {
+#root #raisely-signup-form .raisely-container #raisely-form .active-input {
   outline: 1px #6138d8 solid !important;
 }
-#root #raisely-signup-form #raisely-form-submit {
+#root #raisely-signup-form .raisely-container #raisely-form #raisely-form-submit {
   width: 100%;
   border-radius: 3em;
   box-shadow: none;
@@ -202,40 +226,83 @@ li {
   transition: background 1s, box-shadow 1s;
   margin-top: 2vw;
 }
-#root #raisely-signup-form #raisely-form-submit:hover {
+#root #raisely-signup-form .raisely-container #raisely-form #raisely-form-submit:hover {
   background: #9145d6;
   box-shadow: 0 0 15px dimgray;
   transition: background 1s, box-shadow 1s;
   cursor: pointer;
 }
-#root #raisely-signup-form .raisely-disabled {
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-button-disabled {
   opacity: 0.3 !important;
 }
-#root #raisely-signup-form .raisely-disabled:hover {
+#root #raisely-signup-form .raisely-container #raisely-form .raisely-button-disabled:hover {
   cursor: not-allowed !important;
 }
-#root #raisely-signup-form #raisely-mail-alert {
+#root #raisely-signup-form .raisely-container .raisely-form-disabled {
+  transition: opacity 1s;
+  animation: 1s slow-hide 1s forwards;
+}
+#root #raisely-signup-form .raisely-container #raisely-mail-alert {
   position: absolute;
-  width: 100%;
-  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: none;
+  top: 57%;
+  width: 80%;
   height: auto;
-  left: 0%;
-  bottom: 0%;
   background: whitesmoke;
-  border-radius: 2vw;
-  box-shadow: 0 0 5px #262861;
   font-weight: 600;
   font-size: 0.8vw;
-  padding: 2vw;
-  transform: translate(0, 5vw);
+  z-index: 9999 !important;
   opacity: 0;
-  transition: opacity 1s, transform 1s;
+  transition: opacity 1s;
 }
-#root #raisely-signup-form #raisely-mail-alert span {
+#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-icon {
+  text-align: center;
+  margin: 0vw auto 3vw;
+}
+#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-icon div {
+  width: 8vw !important;
+  height: 8vw !important;
+  margin: auto;
+}
+#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-icon div svg {
+  fill: #e03131 !important;
+}
+#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-text-header {
+  font-size: 2vw;
+  margin-bottom: 2vw;
+}
+#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-text {
+  font-size: 1vw;
+  font-weight: 300;
+  line-height: 200%;
+}
+#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-mail {
+  display: inline-block;
+  width: auto;
+  font-weight: 600;
+  font-size: 1vw;
   color: #5f40d2;
+  background: #f1f1f7;
+  outline: 1px #6138d8 solid !important;
+  padding: 0.5vw 1vw;
+  margin: 1vw 0 4vw;
 }
-#root #raisely-signup-form .mail-alert-enabled {
-  transform: translate(0, 0) !important;
-  opacity: 1 !important;
-  transition: opacity 1s, transform 1s !important;
+#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-button {
+  font-size: 0.8vw;
+  font-weight: 700;
+  margin-bottom: 2vw;
+  z-index: 9999 !important;
+}
+#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-button:hover {
+  color: #5f40d2;
+  cursor: pointer;
+}
+#root #raisely-signup-form .raisely-container .mail-alert-enabled {
+  display: block !important;
+  transition: opacity 1s;
+  animation: 1s slow-display 1s forwards;
 }

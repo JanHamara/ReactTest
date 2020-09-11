@@ -8,9 +8,6 @@ function SignupForm() {
             {/* Raisely Logo */}
             <img src={logo} id="raisely-form-logo" alt="raisely-logo" />
 
-            {/* Sign up Form - Call to Action - Heading */}
-            <h1 className="raisely-form-heading">Login to Raisely</h1>
-
             {/* Sign up Form */}
             <Form formId="raisely-form" />
         </div>
