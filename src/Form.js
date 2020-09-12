@@ -3,6 +3,7 @@ import './index.css';
 import Input from "./Input";
 import SubmitButton from "./SubmitButton";
 import MailAlert from "./MailAlert";
+import SuccessAlert from "./SuccessAlert";
 import { validateMail, validateForm, submitForm } from './api.js'
 
 function Form({ formId }) {
@@ -27,6 +28,9 @@ function Form({ formId }) {
     // Mail Alert is enabled when user inputs mail that is already in the database
     const [mailAlertDisabled, setMailAlertDisabled] = useState("true");
 
+    // Success Alert is enabled when user successfully signs up
+    const [successAlertDisabled, setSuccessAlertDisabled] = useState("true");
+
     // ---------------------------------------------------------------------------------------------------
 
     useEffect(() => {
@@ -40,16 +44,38 @@ function Form({ formId }) {
 
     // ---------------------------------------------------------------------------------------------------
 
-    // Show Mail Alert - showMailAlert()
-
-    const showMailAlert = (formId) => {
-        console.log("Showing mail alert");
-    }
-
     // Disable Mail Alert - disableMailAlert()
     const disableMailAlert = () => {
+        // Hide Mail Alert
         setMailAlertDisabled("true");
+        // Show Form
         setFormDisabled("false");
+    }
+
+    // Enable Mail Alert - enableMailAlert()
+    const enableMailAlert = () => {
+        // Hide Form
+        setFormDisabled("true");
+        // Show Mail Alert
+        setMailAlertDisabled("false");
+    }
+
+    // ---------------------------------------------------------------------------------------------------
+
+    // Disable Success Alert - disableMailAlert()
+    const disableSuccessAlert = () => {
+        // Hide Mail Alert
+        setSuccessAlertDisabled("true");
+        // Show Form
+        setFormDisabled("false");
+    }
+
+    // Enable Success Alert - enableMailAlert()
+    const enableSuccessAlert = () => {
+        // Hide Form
+        setFormDisabled("true");
+        // Show Mail Alert
+        setSuccessAlertDisabled("false");
     }
 
     // ---------------------------------------------------------------------------------------------------
@@ -61,11 +87,12 @@ function Form({ formId }) {
 
         setMailAlertDisabled("true");
 
-        // Validate asynchronously whether email already exists in the database
+        // Validate asynchronously whether email already exists in the database [but only works for test@test.com]
         if (await validateMail(email)) {
             // If response is 'OK' -> Submit the form
             const formResp = await submitForm(firstName, lastName, email, password);
-            return formResp;
+            // Validation for existing mails other than test@test.com
+            return formResp === false ? enableMailAlert() : enableSuccessAlert()
         } else {
             // If email already exists -> Prompt user to choose another one
             setFormDisabled("true");
@@ -100,7 +127,10 @@ function Form({ formId }) {
             </form>
 
             {/* Sign Up Form - Mail Alert */}
-            <MailAlert id="raisely-mail-alert" mail={email} disabled={mailAlertDisabled} disableMailAlert={disableMailAlert} />
+            <MailAlert mail={email} disabled={mailAlertDisabled} disableMailAlert={disableMailAlert} />
+
+            {/* Sign Up Form - Success Alert */}
+            <SuccessAlert mail={email} disabled={successAlertDisabled} disableSuccessAlert={disableSuccessAlert} />
         </div>
     )
 }

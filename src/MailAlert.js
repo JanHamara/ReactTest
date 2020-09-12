@@ -9,7 +9,7 @@ function MailAlert({id, mail, disabled, disableMailAlert}) {
         <div 
             id={id} 
             className={
-                disabled === "false" ? "mail-alert-enabled" : ""
+                disabled === "false" ? "form-alert alert-enabled" : "form-alert"
             }
         >
             {/* Alert Sign */}
@@ -32,7 +32,7 @@ function MailAlert({id, mail, disabled, disableMailAlert}) {
 
             {/* Alert Call-to-Action */}
             <div className="alert-button" onClick={disableMailAlert}>
-                Use a different email address
+                - Use a different email address -
             </div>
         </div>
     )

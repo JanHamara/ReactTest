@@ -242,7 +242,7 @@ li {
   transition: opacity 1s;
   animation: 1s slow-hide 1s forwards;
 }
-#root #raisely-signup-form .raisely-container #raisely-mail-alert {
+#root #raisely-signup-form .raisely-container .form-alert {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -259,28 +259,28 @@ li {
   opacity: 0;
   transition: opacity 1s;
 }
-#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-icon {
+#root #raisely-signup-form .raisely-container .form-alert .alert-icon {
   text-align: center;
   margin: 0vw auto 3vw;
 }
-#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-icon div {
+#root #raisely-signup-form .raisely-container .form-alert .alert-icon div {
   width: 8vw !important;
   height: 8vw !important;
   margin: auto;
 }
-#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-icon div svg {
+#root #raisely-signup-form .raisely-container .form-alert .alert-icon div svg {
   fill: #e03131 !important;
 }
-#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-text-header {
+#root #raisely-signup-form .raisely-container .form-alert .alert-text-header {
   font-size: 2vw;
   margin-bottom: 2vw;
 }
-#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-text {
+#root #raisely-signup-form .raisely-container .form-alert .alert-text {
   font-size: 1vw;
   font-weight: 300;
   line-height: 200%;
 }
-#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-mail {
+#root #raisely-signup-form .raisely-container .form-alert .alert-mail {
   display: inline-block;
   width: auto;
   font-weight: 600;
@@ -291,17 +291,23 @@ li {
   padding: 0.5vw 1vw;
   margin: 1vw 0 4vw;
 }
-#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-button {
+#root #raisely-signup-form .raisely-container .form-alert .alert-button {
   font-size: 0.8vw;
   font-weight: 700;
   margin-bottom: 2vw;
   z-index: 9999 !important;
 }
-#root #raisely-signup-form .raisely-container #raisely-mail-alert .alert-button:hover {
+#root #raisely-signup-form .raisely-container .form-alert .alert-button:hover {
   color: #5f40d2;
   cursor: pointer;
 }
-#root #raisely-signup-form .raisely-container .mail-alert-enabled {
+#root #raisely-signup-form .raisely-container .form-alert-s {
+  top: 60%;
+}
+#root #raisely-signup-form .raisely-container .form-alert-s .alert-mail {
+  margin: 1vw 0 5vw;
+}
+#root #raisely-signup-form .raisely-container .alert-enabled {
   display: block !important;
   transition: opacity 1s;
   animation: 1s slow-display 1s forwards;

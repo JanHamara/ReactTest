@@ -67,8 +67,9 @@ export const submitForm = async (firstName, lastName, email, password) => {
     // Parse the response body text as JSON
     const formResponseBody = await formResponse.json();
 
-    console.log(formResponseBody.message); // thank you for joining
-
-    // Return the response body
-    return formResponseBody
+    // Validation for existing emails other than test@test.com
+    // As the first request to [https://api.raisely.com/v3/check-user] only returns STATUS : "EXISTS" when the tested email is test@test.com
+    // The app checks here the status of response from [https://api.raisely.com/v3/signup] - if it is 400 -> email also already exists
+    // - ELSE we return response body
+    return formResponseBody.status === 400 ? false : formResponseBody.data.status === "ACTIVE" ? formResponseBody : false
 }

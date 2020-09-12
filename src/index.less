@@ -373,9 +373,9 @@
 
         //------------------------------
 
-        // Mail Alert
+        // Mail & Success Alert
 
-        #raisely-mail-alert {
+        .form-alert {
           .p-center;
           .aligntext(center);
           .display(none);
@@ -442,9 +442,17 @@
             }
           }
         }
+
+        .form-alert-s {
+          top: 60%;
+
+          .alert-mail {
+            margin: 1vw 0 5vw;
+          }
+        }
         
         // Mail Alert - Enabled
-        .mail-alert-enabled {
+        .alert-enabled {
           .display(block) !important;
           transition: opacity 1s;
           animation: 1s slow-display 1s forwards;
