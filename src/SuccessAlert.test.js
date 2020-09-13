@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-require('jest-canvas-mock');
+// require('jest-canvas-mock');
 import SuccessAlert from './SuccessAlert'
 import { unmountComponentAtNode } from "react-dom";
 
