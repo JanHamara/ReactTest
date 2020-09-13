@@ -1,7 +1,7 @@
 import React from "react";
 import './index.css';
-import UseAnimations from 'react-useanimations';
-import heart from 'react-useanimations/lib/heart'
+import { UseAnimations } from 'react-useanimations';
+import { heart } from 'react-useanimations/lib/heart'
 
 function SuccessAlert({mail, disabled, disableSuccessAlert}) {
 
@@ -31,7 +31,7 @@ function SuccessAlert({mail, disabled, disableSuccessAlert}) {
 
             {/* Alert Call-to-Action */}
             <div className="alert-button" onClick={disableSuccessAlert}>
-                - Log in -
+                Log in
             </div>
         </div>
     )

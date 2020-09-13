@@ -12,7 +12,12 @@
     "react-useanimations": "^2.0.5"
   },
   "devDependencies": {
+    "jest-canvas-mock": "^2.2.0",
     "typescript": "3.3.3"
+  },
+  "jest": {
+    "verbose": true,
+    "setupFiles": ["jest-canvas-mock"]
   },
   "scripts": {
     "start": "react-scripts start",

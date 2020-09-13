@@ -40,7 +40,7 @@ function Form({ formId }) {
         // - No input field can be empty
         // - Mail address format must be correct
         validateForm(firstName, lastName, email, password) ? setSubmitDisabled("false") : setSubmitDisabled("true")
-    });
+    }, [firstName, lastName, email, password]);
 
     // ---------------------------------------------------------------------------------------------------
 

@@ -32,7 +32,7 @@ function MailAlert({id, mail, disabled, disableMailAlert}) {
 
             {/* Alert Call-to-Action */}
             <div className="alert-button" onClick={disableMailAlert}>
-                - Use a different email address -
+                Use a different email address
             </div>
         </div>
     )
