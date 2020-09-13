@@ -3,23 +3,23 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.submitForm = exports.validateMailFormat = exports.validateForm = exports.validateMail = void 0;
+exports.submitForm = exports.validateMail = void 0;
 
-// Mail Validation - validateMail()
+// ---------------------------------------------------------------------------------------------------
+// API
+// ---------------------------------------------------------------------------------------------------
 var validateMail = function validateMail(email) {
   var emailData, mailResponse, mailResponseBody;
   return regeneratorRuntime.async(function validateMail$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          // Request Post Body
           emailData = {
             "campaignUuid": "46aa3270-d2ee-11ea-a9f0-e9a68ccff42a",
             "data": {
               "email": email
             }
-          }; // Make the POST request to the Raisely API (asynchronous)
-
+          };
           _context.next = 3;
           return regeneratorRuntime.awrap(fetch("https://api.raisely.com/v3/check-user", {
             method: 'post',
@@ -44,32 +44,10 @@ var validateMail = function validateMail(email) {
       }
     }
   });
-}; // Form Validation - validateForm()
+}; // ---------------------------------------------------------------------------------------------------
 
 
 exports.validateMail = validateMail;
-
-var validateForm = function validateForm(firstName, lastName, email, password) {
-  // Validate that no input field is empty
-  if (firstName !== "" && lastName !== "" && email !== "" && password !== "") {
-    // Validate email format
-    return validateMailFormat(email);
-  } else {
-    return false;
-  }
-}; // Mail Format Validation - validateMailFormat()
-
-
-exports.validateForm = validateForm;
-
-var validateMailFormat = function validateMailFormat(email) {
-  // RegEx for validating correct formatting of email address
-  var mailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return mailRegEx.test(email);
-}; // Form Submit - submitForm()
-
-
-exports.validateMailFormat = validateMailFormat;
 
 var submitForm = function submitForm(firstName, lastName, email, password) {
   var formData, formResponse, formResponseBody;
@@ -77,7 +55,6 @@ var submitForm = function submitForm(firstName, lastName, email, password) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          // Request Post Body
           formData = {
             "campaignUuid": "46aa3270-d2ee-11ea-a9f0-e9a68ccff42a",
             "data": {
@@ -86,8 +63,7 @@ var submitForm = function submitForm(firstName, lastName, email, password) {
               "email": email,
               "password": password
             }
-          }; // Make the POST request to the Raisely API (asynchronous)
-
+          };
           _context2.next = 3;
           return regeneratorRuntime.awrap(fetch("https://api.raisely.com/v3/signup", {
             method: 'post',
@@ -104,7 +80,7 @@ var submitForm = function submitForm(firstName, lastName, email, password) {
 
         case 6:
           formResponseBody = _context2.sent;
-          return _context2.abrupt("return", formResponseBody.status === 400 ? false : formResponseBody.data.status === "ACTIVE" ? formResponseBody : false);
+          return _context2.abrupt("return", formResponseBody.data.status === "ACTIVE" ? formResponseBody : false);
 
         case 8:
         case "end":
@@ -112,6 +88,7 @@ var submitForm = function submitForm(firstName, lastName, email, password) {
       }
     }
   });
-};
+}; // ---------------------------------------------------------------------------------------------------
+
 
 exports.submitForm = submitForm;
