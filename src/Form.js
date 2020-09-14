@@ -65,7 +65,7 @@ function Form({ formId }) {
             const formResp = await submitForm(firstName, lastName, email, password);
             formResp ? enableSuccessAlert() : enableMailAlert()
         } else {
-            enableSuccessAlert()
+            enableMailAlert()
         }
     }
 
