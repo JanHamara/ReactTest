@@ -34,7 +34,7 @@ export const submitForm = async (firstName, lastName, email, password) => {
          "lastName": lastName,
          "email": email,
          "password": password
-        } 
+        }
     }
 
     const formResponse = await fetch("https://api.raisely.com/v3/signup", {
@@ -46,7 +46,8 @@ export const submitForm = async (firstName, lastName, email, password) => {
     })
 
     const formResponseBody = await formResponse.json();
-    return formResponseBody.data.status === "ACTIVE" ? formResponseBody : false
+    
+    return formResponseBody.status === 400 ? false : formResponseBody.data.status === "ACTIVE" ? formResponseBody : false
 }
 
 // ---------------------------------------------------------------------------------------------------

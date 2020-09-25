@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import './index.css';
 import { validateMailFormat } from './utils'
 
-function Input({type, name, label, value, onChange}) {
+function Input({testid, type, name, label, value, onChange}) {
     const [inputStatus, setInputStatus] = useState("inactive");
     const [inputEmpty, setInputEmpty] = useState(false);
     const [mailFormatValidated, setMailFormatValidated] = useState(true);
@@ -22,18 +22,22 @@ function Input({type, name, label, value, onChange}) {
         <div
             type={type}
             label={label}
+            data-testid={type === "email" ? "alertdisplay mailalertdisplay" : "alertdisplay"}
             className={
                 inputStatus === "active" ? 'raisely-text-input active-input' : 'raisely-text-input'
             }
         >
             <label className="raisely-label" htmlFor={name}>{label}</label>
 
-            <div 
+            <div
                 className={
                     inputEmpty ? 'raisely-invalid-input raisely-invalid' : (type === "email" && mailFormatValidated === false ? "raisely-invalid-input raisely-invalid" : "raisely-invalid-input")
                 }
             >
-                <span className="raisely-invalid-input-text">
+                <span 
+                    data-testid={type === "email" ? "inputalert mailinputalert" : "inputalert"} 
+                    className="raisely-invalid-input-text">
+
                     {(type !== "email") ? "This field is required" : (value === "" ? "This field is required" : (mailFormatValidated === false ? "Incorrect email format (e.g. text@text.com)" : "This field is required"))}
                 </span>
 
@@ -45,6 +49,8 @@ function Input({type, name, label, value, onChange}) {
             <input
                 type={type}
                 label={name}
+                aria-labelledby={name}
+                data-testid={type === "email" ? "input mailinput" : "input"}
                 name={name}
                 autoComplete="off"
                 value={value}

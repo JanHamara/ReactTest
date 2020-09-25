@@ -9,6 +9,9 @@ function SubmitButton({id, disabled}) {
             className={
                 disabled ? "raisely-button-disabled" : ""
             }
+            disabled={
+                disabled ? true : false
+            }
         >
             Sign Up
         </button>

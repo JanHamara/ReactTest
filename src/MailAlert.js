@@ -25,9 +25,7 @@ function MailAlert({id, mail, disabled, disableMailAlert}) {
 
             <div className="alert-mail">{mail}</div>
 
-            <div className="alert-button" onClick={disableMailAlert}>
-                Use a different email address
-            </div>
+            <div className="alert-button" onClick={disableMailAlert}>Use a different email address</div>
         </div>
     )
 }

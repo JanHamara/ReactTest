@@ -77,8 +77,9 @@ function Form({ formId }) {
                 id={ formId } 
                 onSubmit={submitData}
                 className={
-                    formDisabled ? "raisely-form-disabled" : "" 
+                    formDisabled ? "raisely-form-disabled" : ""
                 }
+                data-testid="form"
             >
 
                 <h1 className="raisely-form-heading">Login to Raisely</h1>
